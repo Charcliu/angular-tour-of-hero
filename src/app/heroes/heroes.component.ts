@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Hero } from '../hero'
 import { HeroService } from '../hero.service'
+import { HttpClient } from '@angular/common/http' //这里是HttpClient
 
 @Component({
   selector: 'app-heroes',
@@ -12,10 +13,13 @@ export class HeroesComponent implements OnInit {
 
   selectedHero: Hero
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getHeroes()
+    this.http.get('api/test/hello').subscribe(res => {
+      console.log(res)
+    })
   }
 
   onSelect(hero: Hero): void {
